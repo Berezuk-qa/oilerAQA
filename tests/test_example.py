@@ -10,7 +10,7 @@ def test_has_title(page: Page):
 def test_get_started_link(page: Page):
     page.goto("https://oiler.pro/ua-ru/")
 
-    # Перехід всі статті блогу.
+    # Перехід всі статті блог1у.
     page.get_by_role("link", name="Все статьи").click()
 
     # Перевірка чи є в назві слово Блог.
