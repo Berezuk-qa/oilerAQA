@@ -11,3 +11,4 @@ def main_ua(playwright: Playwright):
 
 with sync_playwright() as playwright:
     main_ua(playwright)
+
