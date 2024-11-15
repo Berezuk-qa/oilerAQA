@@ -31,7 +31,7 @@ def test_title_amort_list_ua(page: Page):
     expect(page).to_have_title(re.compile("Амортизатор - Купити за вигідною ціною в Києві - Oiler.pro"))
 
 def test_title_filtrmasla_card_ua(page: Page):
-    page.goto("https://oiler.pro/ua-ua/zapchasti/fil-tr-masljanij-mann-filter-hu-820-2-x/")
+    page.goto("https://oiler.pro/ua-ua/zapchasti/masljanyj-fil-tr-mann-filter-hu-820-2-x/")
     expect(page).to_have_title(re.compile("Фільтр масляний MANN-FILTER HU 820/2 x"))
 
 def test_title_shiny_list_ua(page: Page):
