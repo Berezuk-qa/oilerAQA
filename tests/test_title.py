@@ -1,10 +1,11 @@
-import re
+import re, sys
 from playwright.sync_api import Page, expect
-
+sys.stdout.reconfigure(encoding='utf-8')
+     # додав кодування sys дві строчки вище
 def test_title_main_ua(page: Page):
     page.goto("https://oiler.pro/ua-ua/")
-    # Перевірка title.
-    expect(page).to_have_title(re.compile("Oiler - технічне обслуговування та ремонт автомобілів"))
+    # Перевірка title головна
+    expect(page).to_have_title(re.compile("Oiler - технічне обслуговування та ремонт автомобілів."))
 
 def test_title_carservice_ua(page: Page):
     page.goto("https://oiler.pro/ua-ua/sto/sto-obolon/")
@@ -20,7 +21,7 @@ def test_title_masla_card_ua(page: Page):
 
 def test_title_posluga_ua(page: Page):
     page.goto("https://oiler.pro/ua-ua/sto/zamena-masla/")
-    expect(page).to_have_title(re.compile("Заміна масла в двигуні за доступною ціною в Києві на сто OILER"))
+    expect(page).to_have_title(re.compile("Заміна масла в двигуні в Києві - доступна ціна на послуги | СТО OILER"))
 
 def test_title_akum_list_ua(page: Page):
     page.goto("https://oiler.pro/ua-ua/avtotovary/akkumulyatory/")
@@ -64,16 +65,11 @@ def test_title_zapchasti_bmw_5_ua(page: Page):
 
 def test_title_maslo_3filtra_ua(page: Page):
     page.goto("https://oiler.pro/ua-ua/avtotovary/masla/motornye-masla/filter/brand-motul/viscosity-5w-40/specification-acea-b4/")
-    expect(page).to_have_title(re.compile("Моторні масла Motul 5w-40 B4"))
+    expect(page).to_have_title(re.compile("Моторні масла Motul 5w-40 B4 - Купити за вигідною ціною в Києві - Oiler.pro"))
 
 def test_title_maslo_2filtra_ua(page: Page):
     page.goto("https://oiler.pro/ua-ua/avtotovary/masla/motornye-masla/motornye-masla-vo-lvove/filter/brand-motul/")
     expect(page).to_have_title(re.compile("Моторні масла у Львові Motul"))
-
-
-
-
-
 
 # Перевірка тайтлів для російськомовної версії сайту
 
@@ -96,7 +92,7 @@ def test_title_masla_card_ru(page: Page):
 
 def test_title_posluga_ru(page: Page):
     page.goto("https://oiler.pro/ua-ru/sto/zamena-masla/")
-    expect(page).to_have_title(re.compile("Замена масла в Киеве, экспресс замена моторного масла в двигателе"))
+    expect(page).to_have_title(re.compile("Замена масла в двигателе в Киеве - доступная цена на услуги | СТО OILER"))
 
 def test_title_akum_list_ru(page: Page):
     page.goto("https://oiler.pro/ua-ru/avtotovary/akkumulyatory/")
