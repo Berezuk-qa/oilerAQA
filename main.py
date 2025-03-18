@@ -1,59 +1,17 @@
-import pytest
-import re
-from playwright.sync_api import sync_playwright, expect
+# Пошук однакових брендів в двох рядках
+# Ваші рядки
+str1 = "ACCURIDE, ADLER, ALPHA FILTER, AMP, AOMAI, ASPAR, AUTO STANDART, AUTOTECHTEILE, AXIA Brake Calipers, AYFAR, BEGEL GERMANY, BELGUM PARTS, BERU, BM COFFEE, BM group, BMW, CAVO, CELIKYAY, CLA, CX, DAI, DEPO+ALKAR, DP, ELF, FANEX, FBC, FERSA, FIAT, FIRAD, FORD, FUCHS, GAZO, GI, GP, GRAPHITE, HENKEL, HONDA, HYUNDAI, IMPERGOM, ISKRA, ITH, IVECO, JBM, K2, KAERCHER, KAMPOL, KAPIMSAN, KAPSEN, KATRIN, KIA, LEISTUNGLIFT, LUMAG, MAESTRO, MASNER, MAZDA, MERCEDES, MOPART, MOTUS, MTM, NEO TOOLS, NISSAN, NIULI, NOVA, NOXy, NPR, NTN, OEM, OPAR, OPEL, PAPERO, PAX, PEUGEOT, PFI, PRESSOL, PSA, RECTOR, REMY, RENAULT, RING, ROTWEISS, SF, SINOLOONG, SOLGY, SPC, SUZUKI, SVAC, TACLAR, TES, TOP TOOLS, TOPEX, TOTAL, TOYOTA, TRANSPORTERPARTS, TRANSTEC, TURK, TWP Germany, VAG, VERTO, VI, VIBRA MASTER, WUNDER, WURTH, РУТА"
+str2 = "SPIDAN, HELLA, ATE, MANN-FILTER, PIERBURG, LuK, EBERSPÄCHER, VICTOR REINZ, ELRING, BorgWarner (BERU), PAGID, WALKER, BOGE, NGK, BILSTEIN, KONI, SWF, VALEO, WABCO, RUVILLE, EXIDE, VARTA, SIDAT, BV PSH, ERNST, BOSCH, CONTITECH, SACHS, GATES, KNECHT, LEMFÖRDER, VAN WEZEL, MONROE, PURFLUX, TEXTAR, BOSAL, DAYCO, CHAMPION, SPAHN GLÜHLAMPEN, BREMI, JURID, SKF, Westfalia, FTE, Herth+Buss Jakoparts, LÖBRO, QUINTON HAZELL, FRAM, TYC, FERODO, PE Automotive, OPTIBELT, BREMBO, DENSO, ams-OSRAM, ZF, GABRIEL, Herth+Buss Elparts, MINTEX, PHILIPS, KLOKKERHOLM, BorgWarner (Wahler), AKS DASIS, HENGST FILTER, CONTINENTAL/VDO, KYB, ZIMMERMANN, FRIESEN, GLASER, DELPHI, FARCOM, TECNOCAR, SogefiPro, METZGER, MAGNETI MARELLI, AL-KO, WAECO, FEBI BILSTEIN, BRINK, TRISCAN, BUGATTI, SNR, EIBACH, PAYEN, BUDWEG CALIPER, ULO, LRT, HJS, METELLI, NISSENS, STABILUS, NK, BE TURBO, OPTIMAL, MAPCO, MOOG, SIDEM, FONOS, UFI, JOHNS, AJUSA, CORTECO, AE, SOFIMA, BERGA, MEYLE, NWB, AMC Filter, SWAG, ROADHOUSE, REMSA, DOLZ, URW, JAPANPARTS, BUGIAD, ICER, FACET, TRW, VAICO, CLEAN FILTERS, AISIN, DUPLI COLOR, MOTIP, PRESTO, Motorcraft, RAMEDER, LESJÖFORS, KILEN, BTS Turbo, HEPU, ALCO FILTER, GK, SCHLÜTTER TURBOLADER, VEMO, KAMOKA, DENCKERMANN, WOLF, CHAMPION LUBRICANTS, NATIONAL, IMASAF, FAG, MTS, BBT, BREDA LORETT, LPR, OCAP, TRUSTING, Kavo Parts, GLYCO, INA, NRF, A.B.S., CASTROL, BIRTH, TRUCKTEC AUTOMOTIVE, EFI AUTOMOTIVE, TUDOR, CALORSTAT by Vernet, NÜRAL, MECAFILTER, TIMKEN, AIRTEX, ACDelco, LIQUI MOLY, ERA Benelux, SCT - MANNOL, ELSTOCK, TRICO, 3F QUALITY, HALDEX, DINEX, ERA, FRECCIA, FLENNOR, ELWIS ROYAL, IPSA, HUTCHINSON, FAE, FULMEN, NECTO, CAR, MEAT & DORIA, Saleri SIL, EYQUEM, AVA QUALITY COOLING, NIPPARTS, DIEDERICHS, AFA, ECS, FILTRON, ASHIKA, SASIC, IPD, SEIM, BERAL, FAI AutoParts, JP GROUP, INTERMOTOR, FENOX, RECORD FRANCE, AS, AMC, DON, GIRLING, BRECK, AP, KAWE, MAHLE, BRECO, PILENGA, LIZARTE, LENCO, SACHS PERFORMANCE, fri.tech., JDEUS, sbs, ASSO, AUTEX, TOPRAN, WALKER PRODUCTS, K&N FILTERS, E.T.F., GRAF, CIFAM, KWP, FRIGAIR, PJ, GENERAL RICAMBI, AKRON-MALÒ, CDX, CALIX, MTE-Thomson, AUTOMEGA, WIX FILTERS, CEF, BorgWarner Schwitzer, BorgWarner, BorgWarner (3K), ORIGINAL IMPERIUM, ST-TEMPLIN, EUROTEC, PRASCO, HOFFER, MESSMER, SAMKO, MOTAIR TURBO, TRW Engine Component, MERITOR, BLUE PRINT, AUTOFREN SEINSA, BF, DT Spare Parts, TESLA, VENEPORTE, MASTER-SPORT GERMANY, VATOIL, ALKAR, CARPRISS, WOKING, FA1, GGT, DEPA, GSP, SONNAK, CENTRA, BOSCH DIAGNOSTICS, Open Parts, FRENKIT, Brake ENGINEERING, GOETZE ENGINE, KLAXCAR FRANCE, MOTORAD, GLYSANTIN, SUPLEX, EAI, Koyo, CEVAM, BARUM, PRESTOLITE ELECTRIC, JANMOR, EUROL, EXEDY, RAICAM, ROC, MAXGEAR, FRAS-LE, CAUTEX, BM Catalysts, FIRST LINE, SNRA, FREMAX, EUROCABLE, ATL Autotechnik, FENNO, COMLINE, AHE, ASMET, WAT, RTS, SERCORE, KOLBENSCHMIDT, DETA, MOTUL, CoopersFiaam, NPS, FISPA, ASHUKI by Palidium, ENERGIZER, KLARIUS, Pilkington, HITACHI, BRECAV, BANDO, SIGAM, VILLAR, DRI, RAVENOL, MFILTER, OSVAT, CS Germany, KALE OTO RADYATÖR, MAPA, DITAS, BORG & BECK, BGA, ALANKO, JAPKO, WEEN, CASCO, NARVA, FRAP, EEC, MULLER FILTER, RCA FRANCE, TRUCKTECHNIC, BRISK, COJALI, ZAFFO, GALFER, ETS, EPS, KW, MANDO, 555, TECNECO FILTERS, REACH, montcada, KS TOOLS, VIGOR, EDELMANN, DYS, GUARNITAUTO, SAMPIYON FILTER, WE PARTS, AVS AUTOPARTS, RAPRO, SHELL, LASER TOOLS, DYNAMATRIX, JTEKT, POLIPLAST, Faurecia, SIEGEL Automotive, Prestone, INTERVALVES, AUTOMOTOR France, TENACITY, TCMATIC, ELTA AUTOMOTIVE, DODA, vika, SpeedMate, DPA, CLUTCHNUS, Bosch EZ Test, ACKOJA, STOP&GO, QUICK STEER, MI.R.A., PETEC, BENDIX Braking, AUSTRALIAN CLUTCH, TOMEX Brakes, JS ASAKASHI, GEBE, Omnicraft, Airstal, Eminox, MAX, C.E.I., EUROREPAR, REMANTE, opzional, GOLD, DIAMAX, KRIOS, CTR, YENMAK, TEKNOROT, VEMA, ABE, Magnum Technology, CONTINENTAL, MOBIL, YUASA, GS, BSG, SONAX, KING, KAISHIN, KM International, CALIBER, AUTOTEAM, THERMOTEC, YAMATO, MISFAT, TrakMotive, AUGER, LAUBER, WAGNER, LUCAS, CLEVITE, XXLMARMITTEITALIANE, ERT, ET ENGINETEAM, DJ PARTS, PROTECHNIC, HIDRIA, AD KÜHNER, MUBEA, LINEX, Arnott, PowerMax, KRAFT Automotive, SAKURA, LIPE CLUTCH, EGT, CTR, BLIC, PATRON, MECARM, WESTLAKE, MOTAQUIP, EATON, Maysan Mando, LECOY, ASAM, FLEETGUARD, SPJ, DOGA, DANAHER, TEDGUM, STELLOX, SAFA, 3RG, LYNXAUTO, Electric Life, CASALS, Shaftec, ROTA, TUNGSRAM, SEM LASTIK, GARRETT, Bosch UP Test, SAMPA, HELLA PAGID, WAI, SAKURA Automotive, ASVA, SPICER, AUTOKIT, Multiparts, AUTOCLIMA, ABAKUS, MABYPARTS, FIL FILTER, BH SENS Huf, GOODWILL, Metalcaucho, STC, CARLUBE Tetrosyl, NEOLUX®, FEBEST, STARLINE, ROTINGER, METAL LEVE, CAFFARO, NiBK, OSSCA, PROFIT, Autogamma, JC PREMIUM, PASCAL, BTA, NEXUS, CARGOPARTS, PACOL, PNEUMATICS, S-TR, SBP, TRUCKLIGHT, MOBILETRON, LUZAR, LASO, NE, KRAFTTECH, Lift-Tek, PMM, MIRAGLIO, HKT, FORMPART, NSK, UNIGOM, HELLA GUTMANN, AUTLOG, DEXWAL MOBIDEX, VEGE, FINWHALE, Buchli, LUKOIL, HOLA, Talosa, Maxtrac, SiVento, Eurobrake, STARTVOLT, TRIALLI, MDR, HAZET, 1A FIRST AUTOMOTIVE, Borsehung, HC-Cargo, G+M KAT, QUARO, RYMEC, ASMETAL, TMI, WILMINK GROUP, FARE SA, FI.BA, FACAR, HEYNER, AS-PL, G.U.D., Ac Rolcar, ASTER, ZERO, ASIMCO, IJS GROUP, HASTINGS PISTON RING, ARAL, DONALDSON, RED-LINE, COFLE, BREMSI, POLMO, KEY PARTS, CTE, DYNAMAX, Dipasport, turbo by Intec, FOMAR Friction, ZEKKERT, MAXTECH, KROON OIL, ALLIGATOR, GEDORE, NORMA, GH, GAUSS, JURATEK, SKT, FIT, FAST, EuroFlo, OREX, SCHRADER, Dr!ve+, TURBORAIL, R BRAKE, GREENCAR Automotive, LA.R.A., JUMASA, ESEN SKV, TRICLO, LUCAS FILTERS, FERODO RACING, 4u, B CAR, NISSHINBO, BRAXIS, MITSUBOSHI, BBR Automotive, Parker Racor, A.B.A, HSB GOLD, ЬRO Parts, HART, IZUMI, Aslyx, AIR ZONCEN, A.Z. Meisterteile, ELPI, Perfect EQUIPMENT, Michelin-Helix, AMPRO, SEMPERIT, UNIROYAL, BARUM Tires, GENERAL TIRE, MATADOR, GISLAVED, VIKING, MABOR, KRAW, iwis Motorsysteme, ATECSO, AUTOLITE, YSPARTS, BOGAP, ACAUTO, GM, ECU Testing, at autoteile germany, NANFENG, TitanX, MOTRIO, ROWE, itsens, YTT, LUSA, LRPI, PLYOM, Alfa e-Parts, Calipere+ NAIBA, Autopumps UK, Hankook, Dunlop Airsuspension, SB, NIFEA, ATOMTEC, VITAL SUSPENSIONS, PHOENIX, PRIME-RIDE, BLOCKSTEM, CONTITECH AIR SPRING, FR REDAELLI, ACPS-ORIS, MK Kashiyama, ADVICS, RHIAG, VALVOLINE, KALE, RESTAGRAF, CPB, Hi-Q, Mchanix, OXIMO, MASUMA, ZZVF, HAMMER, NEW BLOX, QUICK BRAKE, GEBA, GKN, HIFI FILTER, UCEL, FKG, SIAAM, GNS, PROTECH, PREXAparts, reman by Intec, REPSOL, WXQP, Henkel Parts, YEC, NTY, STARK, RIDEX, IAP QUALITY PARTS, HD, AUTOGEM, SPIDAN CHASSIS PARTS, EBI, EBC Brakes, MERTZ, BOTTO RICAMBI, EBS, GMB, MOBILAND, SATO tech, POINT GEAR, STARDAX, NAKAMOTO, MUTLU BATTERY, AE TOPLIGHT, SYNCRONIX, APlus, ZETA-ERRE, Eurocams, COGEFA France, SONTIAN, ADRIAUTO, MOTIVE, JK Pioneer, PHONOCAR, BERU by DRiV, GOOM, BorgWarner (AWD), RICAMBIFLEX GM, PartsTec, OE Germany, MEC-DIESEL, NAPA, INTER-TURBO, CWORKS, Exact, DACO, The NewLine, KUTNAK AUTOMOTIVE, FREY, VADEN ORIGINAL, MILES, LEMARK, OMG SRL, Amity AP, STANDARD SPRINGS, Dr.Motor Automotive, ATG, BTE, B-RING, KRONER, AIC, Litens, Jrone, RODRUNNER, YUMAK, BR Turbo, PAAZ, DEYE, HP, JIKIU, MOTORHERZ, ProVia, PRT, GPN, CORAM, BMS, ENGITECH, POWER TRUCK, PURRO, REINHOCH, TREEZER, MTR, VARTEX GERMANY, KRAFTVOLL GERMANY, MEHA AUTOMOTIVE, MICHELIN Wipers, SRT, A-N PARTS, Azumi, SHW Performance, ENERGY, hajus Autoteile, ENEOS, TURBO-TEC, TOKICO, STARTCAR, DLZ, CONTINENTAL Tires, ProfiPower, Oyodo, JPN, PowerEdge, WINTECH AUTO - WTW, Professional Parts, Odyssey Battery, CIDAK"
 
+# Розбиття рядків на множини слів (за комами і пробілами)
+words1 = set(word.strip() for word in str1.split(','))
+words2 = set(word.strip() for word in str2.split(','))
 
-@pytest.fixture(scope="module")
-def browser():
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)  # Установите headless=True, если не нужен видимый браузер
-        yield browser
-        browser.close()
+# Знаходження спільних слів
+common_words = words1 & words2
 
-
-def test_zapus_na_servis_ua(browser):
-    page = browser.new_page()
-
-    try:
-        # Открытие целевой страницы
-        page.goto("https://oiler.pro/ua-ua/tehnicheskij-tovar/")
-
-        # Нажатие кнопки "Купити"
-        page.get_by_role("button", name="Купити").click()
-
-        # Нажатие "Оформити замовлення"
-        page.locator("#ui-id-4").get_by_role("button", name="Оформити замовлення").click()
-
-        # Переход к форме оформления
-        page.goto("https://oiler.pro/ua-ua/checkout/#step-phone")
-
-        # Заполнение телефона
-        phone_input = page.get_by_placeholder("Мобільний телефон")
-        phone_input.click()
-        phone_input.fill("+38 095 681 05 44")
-        page.locator("div").filter(has_text="Особистий кабінет Закрити Особистий кабінет Електронна пошта Пароль Особистий ка").nth(2).click()
-        # Переход к выбору доставки
-        page.get_by_role("button", name="Доставка та оплата").click()
-        page.get_by_role("row", name="Oiler Відрадний").get_by_role("cell").first.click()
-
-        # Заполнение комментария
-        comment_input = page.get_by_placeholder("Коментар")
-        comment_input.click()
-        comment_input.fill("TEST * Записатись на автосервіс * Відрадний")
-
-        # Переход на следующий шаг
-        page.get_by_role("button", name="Наступне").click()
-
-        # Размещение заказа
-        page.get_by_role("button", name="Розмістити Замовлення").click()
-
-        # Проверка заголовка страницы
-        expect(page).to_have_title(re.compile("Success Page"))
-
-        # Альтернативная проверка наличия текста "Дякуємо"
-        success_text = page.locator("text=Дякуємо")
-        assert success_text.is_visible(), 'Текст "Дякуємо" не найден на странице.'
-
-    finally:
-        # Закрытие страницы в конце теста
-        page.close()
+# Виведення результату
+if common_words:
+    print("Спільні слова:", ", ".join(common_words))
+else:
+    print("Спільних слів немає.")

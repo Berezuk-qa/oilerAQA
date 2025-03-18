@@ -5,7 +5,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 def test_title_main_ua(page: Page):
     page.goto("https://oiler.pro/ua-ua/")
     # Перевірка title головна
-    expect(page).to_have_title(re.compile("Oiler - технічне обслуговування та ремонт автомобілів."))
+    expect(page).to_have_title(re.compile("СТО в Києві, ремонт автомобіля в автосервісі - доступні ціни"))
 
 def test_title_carservice_ua(page: Page):
     page.goto("https://oiler.pro/ua-ua/sto/sto-obolon/")
@@ -53,7 +53,7 @@ def test_title_onas_ua(page: Page):
 
 def test_title_sto_ua(page: Page):
     page.goto("https://oiler.pro/ua-ua/sto/")
-    expect(page).to_have_title(re.compile("СТО в Києві, Ремонт автомобіля за доступними цінами в Автосервісі OILER"))
+    expect(page).to_have_title(re.compile("СТО в Києві, ремонт автомобіля в автосервісі - доступні ціни | СТО OILER"))
 
 def test_title_blog_ua(page: Page):
     page.goto("https://oiler.pro/ua-ua/blog/")
@@ -76,7 +76,7 @@ def test_title_maslo_2filtra_ua(page: Page):
 def test_title_main_ru(page: Page):
     page.goto("https://oiler.pro/ua-ru/")
     # Перевірка title.
-    expect(page).to_have_title(re.compile("Oiler - техническое обслуживание и ремонт автомобилей."))
+    expect(page).to_have_title(re.compile("Техническое обслуживание и ремонт автомобилей – доступная цена | СТО OILER"))
 
 def test_title_carservice_ru(page: Page):
     page.goto("https://oiler.pro/ua-ru/sto/sto-obolon/")
@@ -124,7 +124,7 @@ def test_title_onas_ru(page: Page):
 
 def test_title_sto_ru(page: Page):
     page.goto("https://oiler.pro/ua-ru/sto/")
-    expect(page).to_have_title(re.compile("СТО в Киеве, Ремонт автомобиля по доступным ценам в Автосервисе OILER"))
+    expect(page).to_have_title(re.compile("СТО в Киеве, ремонт автомобиля в автосервисе – доступные цены | СТО OILER"))
 
 def test_title_blog_ru(page: Page):
     page.goto("https://oiler.pro/ua-ru/blog/")

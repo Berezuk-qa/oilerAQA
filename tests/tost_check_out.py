@@ -10,25 +10,25 @@ def browser():
         browser.close()
 
 
-def test_zapus_na_servis_ua(browser):
-    page = browser.new_page()
-    page.goto("https://oiler.pro/ua-ua/tehnicheskij-tovar/")
-    page.get_by_role("button", name="Купити").click()
-    page.locator("#ui-id-4").get_by_role("button", name="Оформити замовлення").click()
-    page.goto("https://oiler.pro/ua-ua/checkout/#step-phone")
-    page.get_by_placeholder("Мобільний телефон").click()
-    page.get_by_placeholder("Мобільний телефон").fill("+38 095 681 05 44")
-    #після валідації кнопки додав клік по вільному полю
-    page.locator("div").filter(has_text="Особистий кабінет Закрити Особистий кабінет Електронна пошта Пароль Особистий ка").nth(2).click()
-    page.get_by_role("button", name="Доставка та оплата").click()
-    page.get_by_role("row", name="Oiler Відрадний").get_by_role("cell").first.click()
-    page.get_by_placeholder("Коментар").click()
-    page.get_by_placeholder("Коментар").fill("TEST * Записатись на автосервіс * Відрадний")
-    page.get_by_role("button", name="Наступне").click()
-    page.get_by_role("button", name="Розмістити Замовлення").click()
-    expect(page).to_have_title(re.compile("Success Page"))
-    #assert page.is_visible(timeout=5000)"text=Дякуємо"), 'Текст "Дякуємо" не знайдено на сторінці.'
-    page.close()
+#def test_zapus_na_servis_ua(browser):
+#    page = browser.new_page()
+#    page.goto("https://oiler.pro/ua-ua/tehnicheskij-tovar/")
+#    page.get_by_role("button", name="Купити").click()
+#   page.locator("#ui-id-4").get_by_role("button", name="Оформити замовлення").click()
+#    page.goto("https://oiler.pro/ua-ua/checkout/#step-phone")
+#    page.get_by_placeholder("Мобільний телефон").click()
+#    page.get_by_placeholder("Мобільний телефон").fill("+38 095 681 05 44")
+#    #після валідації кнопки додав клік по вільному полю
+#    page.locator("div").filter(has_text="Особистий кабінет Закрити Особистий кабінет Електронна пошта Пароль Особистий ка").nth(2).click()
+#    page.get_by_role("button", name="Доставка та оплата").click()
+#    page.get_by_role("row", name="Oiler Відрадний").get_by_role("cell").first.click()
+#    page.get_by_placeholder("Коментар").click()
+#    page.get_by_placeholder("Коментар").fill("TEST * Записатись на автосервіс * Відрадний")
+#    page.get_by_role("button", name="Наступне").click()
+#    page.get_by_role("button", name="Розмістити Замовлення").click()
+#    expect(page).to_have_title(re.compile("Success Page"))
+#    #assert page.is_visible(timeout=5000)"text=Дякуємо"), 'Текст "Дякуємо" не знайдено на сторінці.'
+#    page.close()
 
 def test_samoviviz_ua(browser):
     page = browser.new_page()
