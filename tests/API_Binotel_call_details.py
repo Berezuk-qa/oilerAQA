@@ -3,6 +3,7 @@ import json
 import pytest
 from playwright.async_api import async_playwright
 
+# Приклад із постмана https://prnt.sc/WBrdhDZIJqFd
 API_URL = "https://api.binotel.com/api/4.0/stats/call-details.json"
 HEADERS = {"Content-Type": "application/json"}
 DATA = {
@@ -13,7 +14,7 @@ DATA = {
 
 
 @pytest.mark.asyncio
-async def test_api():
+async def test_api_Binotel_call_details():
     async with async_playwright() as p:
         browser = await p.chromium.launch()
         context = await browser.new_context()

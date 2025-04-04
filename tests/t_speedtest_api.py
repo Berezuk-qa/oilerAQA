@@ -51,7 +51,8 @@ api_key = "AIzaSyCxh5G_ODaZS8gDH2cVuS5roosCRda6SjI"
 urls = ["https://oiler.pro/ua-ua/", "https://oiler.pro/ua-ua/sto/", "https://oiler.pro/ua-ua/shiny/filter/brand-continental/",
 "https://oiler.pro/ua-ua/zapchasti/shiny-continental-contipremiumcontact-6-fr-235-40-r18-91y/", "https://oiler.pro/ua-ua/sto/predprodajnaya-diagnostika-avto/",
 "https://oiler.pro/ua-ua/sto/sto-lukyanovka/", "https://oiler.pro/ua-ua/avtotovary/masla/motornye-masla/filter/brand-motul/",
-"https://oiler.pro/ua-ua/motul-6100-syn-nergy-5w-40/", "https://oiler.pro/ua-ua/blog/", "https://oiler.pro/ua-ua/zapchasti/category-amortizator-1/filter/brand-kyb/",
+"https://oiler.pro/ua-ua/motul-6100-syn-nergy-5w-40/", "https://oiler.pro/ua-ua/blog/", "https://oiler.pro/ua-ua/blog/oshibka-epc-prichiny-poyavleniya-i-sposoby-ustraneniya/",
+"https://oiler.pro/ua-ua/zapchasti/category-amortizator-1/filter/brand-kyb/",
 "https://oiler.pro/ua-ua/zapchasti/amortizator-kyb-334254/"]
 analyze_pages(urls, api_key)
 
